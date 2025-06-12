@@ -1,0 +1,61 @@
+body {
+	background-color: #212121;
+	font-family: Courier;
+}
+#CON {
+	background-color: #000f73;
+    max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	border: 2px solid gold;
+}
+
+#logo {
+	border: 2px solid gold;
+	background-color: #c90000;
+	font-weight: bold;
+	color: gold;
+	font-size: 60px;
+	text-align: center;
+	letter-spacing: 14px;
+	
+}
+
+#menu {
+	border: 2px solid gold;
+	background-color: #c90000;
+	flex-wrap: wrap;
+	margin-top: 20px;
+	padding: 10px;
+	display: flex;    
+    justify-content: center;
+	gap: 15px;
+}
+
+.button {
+	font-weight: 900;
+	text-align: center;
+	height: 30px;
+	font-size: 28px;
+	padding: 10px;
+	border: 2px solid gold;
+	color: gold;
+	line-height: 30px;
+	align-items: center;
+	letter-spacing: 2px;
+}
+
+.button:hover {
+	background-color: gold;
+	color: black;
+	cursor: pointer;
+}
+
+.img {
+	border: 2px solid gold;
+	margin-top: 20px;
+	width: 100%;
+	max-width: 996px;
+	height: auto
+}

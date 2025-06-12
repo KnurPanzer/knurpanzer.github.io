@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>BOSANSKA ARTILERIJA!</title>
+  <link rel="stylesheet" href="Bosniaa.css" type="text/css" />
+</head>
+<body>
+
+	<div id="CON">
+	
+		<div id="logo">
+		BOSANSKA ARTILERIJA
+		</div>
+		
+		<div id="menu">
+
+			<div class="button" onclick="playSound()">ARTILERIJA PLAY</div>
+		
+			<div class="button" onclick="stopSound()">ARTILERIJA STOP</div>
+
+			<div class="button" onclick="resetSound()">ARTILERIJA RESET</div>
+		
+		</div>
+		
+		<img src="art.jpg" class="img">
+	
+	</div>
+	
+  <audio id="mySound" src="Bosanska_Artiljerija_KnurPanzer.mp3" preload="auto"></audio>
+
+  <script>
+    function playSound() {
+      const sound = document.getElementById("mySound");
+      sound.play();
+    }
+	function stopSound() {
+		const sound = document.getElementById("mySound");
+		sound.pause();
+	}
+	function resetSound() {
+		const sound = document.getElementById("mySound");
+		sound.pause();
+		sound.currentTime = 0;
+	}
+  </script>
+
+</body>
+</html>
