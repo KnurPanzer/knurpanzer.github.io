@@ -12,6 +12,7 @@ body {
 }
 
 #logo {
+	flex-wrap: wrap;
 	border: 2px solid gold;
 	background-color: #c90000;
 	font-weight: bold;
