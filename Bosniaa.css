@@ -21,7 +21,6 @@ body {
 	font-size: 50px;
 	text-align: center;
 	letter-spacing: 10px;
-	
 }
 
 #menu {
@@ -65,4 +64,92 @@ body {
 	width: 100%;
 	max-width: 1196px;
 	height: auto
+}
+
+#next {
+	border-radius: 5px;
+	border: 2px solid gold;
+	background-color: #c90000;
+	padding: 10px;
+	display: flex;    
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.gwiazdka {
+	margin-top: 5px;
+	margin-left: 20px;
+	margin-right: 20px;
+	width: 100%;
+	max-width: 375px;
+	height: 70px;
+}
+
+#button1 {
+	border-radius: 5px;
+	font-weight: 900;
+	text-align: center;
+	height: auto;
+	font-size: 25px;
+	padding: 10px;
+	border: 2px solid gold;
+	color: gold;
+	line-height: 30px;
+	align-items: center;
+	letter-spacing: 2px;
+	transition: 0.30s ease-in-out;
+}
+
+#button1:hover {
+	background-color: gold;
+	color: black;
+	cursor: pointer;
+	box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.65);
+}
+
+.popup {
+	border: 2px solid gold;
+	border-radius: 5px;
+	text-align: center;
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 100%;
+	width: 100%;
+	max-width: 1200px;
+	background-color: #000f73;
+	padding: 20px;
+	box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+	transition: bottom 2s ease;
+	z-index: 1;
+	
+}
+
+.popup.show {
+	bottom: 0%;
+}
+
+#btt {
+	flex-wrap: wrap;
+	margin-top: 50px;
+	margin-bottom: 30px;
+	border-radius: 5px;
+	font-weight: 900;
+	text-align: center;
+	height: auto;
+	font-size: 25px;
+	padding: 10px;
+	border: 2px solid gold;
+	color: gold;
+	line-height: 30px;
+	align-items: center;
+	letter-spacing: 2px;
+	transition: 0.30s ease-in-out;
+}
+
+#btt:hover {
+	background-color: gold;
+	color: black;
+	cursor: pointer;
+	box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.65);
 }
