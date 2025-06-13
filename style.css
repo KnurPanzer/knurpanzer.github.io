@@ -1,0 +1,107 @@
+#body {
+	text-align: center;
+	background-color: #101010;
+}
+
+#con {
+	display: inline-block;
+	margin: auto;
+	margin-top: 10px;
+	border: 2px solid orange;
+	border-radius: 25px;
+	padding: 25px;
+	box-shadow: 0 0 15px 2px orange;
+}
+
+#check {
+	display: inline-block;
+	border: 2px solid orange;
+	border-radius: 25px;
+	margin: 25px;
+	margin-top: 25px;
+	margin-bottom: 50px;
+	background-color: black;
+	text-align: center;
+	padding: 25px;
+	
+}
+
+#Capa_1 {
+	fill: black;
+	height: 200px;
+	width: auto;
+	transition: all 0.5s ease-in-out;
+}
+
+
+@keyframes miganie {
+	0% {fill: black;transform: scale(1.0);}
+	50% {fill: orange;transform: scale(1.025);}
+	100% {fill: black;transform: scale(1.0);}
+}
+
+@keyframes miganie2 {
+	0% {box-shadow: 0 0 0 0 orange;transform: scale(1.0);}
+	50% {box-shadow: 0 0 30px 5px orange;transform: scale(1.025);}
+	100% {box-shadow: 0 0 0 0 orange;transform: scale(1.0);}
+}
+
+#button {
+	font-family: Courier;
+	font-weight: bold;
+	font-size: 40px;
+	letter-spacing: 5px;
+	border: 2px solid orange;
+	border-radius: 25px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
+	padding: 30px;
+	width: 200px;
+	cursor: pointer;
+	background-color: black;
+	color: orange;
+	transition: all 0.2s ease-in-out;
+}
+
+#button:hover {
+	transform: scale(1.05);
+}
+
+#button.active {
+	text-shadow: 0 2px 5px black;
+	background-color: orange;
+	color: black;
+	box-shadow: 0 0 30px 5px orange;
+}
+
+.animate {
+	animation: miganie 1s infinite;
+}
+
+.animate1 {
+	animation: miganie2 1s infinite;
+}
+
+#button1 {
+	margin-top: 50px;
+	font-family: Courier;
+	font-weight: bold;
+	font-size: 40px;
+	letter-spacing: 5px;
+	border: 2px solid orange;
+	border-radius: 25px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
+	padding: 30px;
+	width: 200px;
+	cursor: pointer;
+	background-color: black;
+	color: orange;
+	transition: all 0.2s ease-in-out;
+}
+
+#button1:hover {
+	transform: scale(1.05);
+}
