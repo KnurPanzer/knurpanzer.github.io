@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMERIDO ROULETTE</title>
+<link rel="icon" href="headicon2.svg" type="image/svg+xml">
+<style>
+  body {
+    font-family: Courier, monospace;
+    text-align: center;
+    margin-top: 10px;
+    background: #212121;
+    color: white;
+    position: relative;
+  }
+  
+  #con {
+	box-shadow: 0px 5px 10px 3px black, 0 0 10px 3px gold;
+	border: 2px solid gold;
+	border-radius: 10px;
+	background-color: #c90000;
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-block;
+	padding: 20px;
+  }
+  
+  #logo {
+	text-shadow: gold 0 2px 5px;
+	color: gold;
+	box-shadow: 0px 5px 10px 3px black, 0 0 10px 3px gold;
+	border: 2px solid gold;
+	border-radius: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+	font-weight: bold;
+	background-color: #000f73;
+    font-size: 26px;
+	letter-spacing: 8px;
+    padding: 10px;
+  }
+  
+  #pointer {
+    width: 0; 
+    height: 0; 
+    margin: 0 auto;
+	margin-bottom: 5px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid gold;
+	filter: drop-shadow(0px 5px 10px black);
+	filter: drop-shadow(0px 0px 10px gold)
+
+  }
+  canvas {
+    background-color: #111;
+    border-radius: 50%;
+    border: 5px solid #008000;
+    display: block;
+    margin: 0 auto;
+	padding: 3px;
+  }
+  
+  #can {
+	background-color: #111;
+    border-radius: 50%;
+    border: 2px solid gold;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px; /* odsuń w górę, bo wskaznik jest wyżej */
+	box-shadow: 0px 5px 10px 3px black, 0 0 10px 3px gold;
+	padding: 3px;
+  }
+  
+  #spinBtn {
+	text-shadow: gold 0 2px 5px;
+	color: gold;
+	box-shadow: 0px 5px 10px 3px black, 0 0 10px 3px gold;
+	border: 2px solid gold;
+	border-radius: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+	font-weight: bold;
+	background-color: #000f73;
+    margin-top: 20px;
+    font-size: 22px;
+	letter-spacing: 3px;
+    padding: 10px;
+    cursor: pointer;
+	transition: all 0.2s ease-in-out;
+  }
+  
+  #spinBtn:hover {
+	transform: scale(1.03);
+	box-shadow: 0px 0px 20px 5px gold;
+	color: black;
+	background-color: gold;
+	text-shadow: black 0 2px 5px;
+  }
+  
+  #back {
+	text-shadow: gold 0 2px 5px;
+	color: gold;
+	box-shadow: 0px 5px 10px 3px black, 0 0 10px 3px gold;
+	border: 2px solid gold;
+	border-radius: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+	font-weight: bold;
+	background-color: #000f73;
+    margin-top: 20px;
+    font-size: 22px;
+	letter-spacing: 3px;
+    padding: 10px;
+    cursor: pointer;
+	transition: all 0.2s ease-in-out;
+  }
+  
+  #back:hover {
+	transform: scale(1.03);
+	box-shadow: 0px 0px 20px 5px gold;
+	color: black;
+	background-color: gold;
+	text-shadow: black 0 2px 5px;
+  }
+  
+  #result {
+	text-shadow: gold 0 2px 5px;
+	color: gold;
+	letter-spacing: 4px;
+	text-align:center;
+	justify-content: center;
+	box-shadow: 0px 5px 10px 3px black, 0 0 10px 3px gold;
+	margin-top: 20px;
+	border: 2px solid gold;
+	border-radius: 10px;
+	padding: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color: #000f73;
+	height: 78px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  #los {
+	box-shadow: 0px 5px 10px 3px black, 0 0 10px 3px gold;
+	margin-top: 20px;
+	border: 2px solid gold;
+	border-radius: 10px;
+	padding: 20px;
+	background-color: #000f73;
+  }
+</style>
+</head>
+<body>
+
+<div id="con">
+
+<div id="logo">AMERIDO<br>ROULETTE</div>
+
+<div id="los">
+
+<div id="pointer"></div>
+
+
+<div id="can"><canvas id="wheel" width="400" height="400"></canvas></div>
+
+
+</div>
+
+<div id="spinBtn">----> SPIN <----</div>
+
+<div id="result"></div>
+
+<div id="back">BACK TO MAIN PAGE</div>
+
+</div>
+
+<script>
+	
+	document.getElementById('back').addEventListener('click', () => {
+		window.location.href = "index.html";
+		});
+	
+  const canvas = document.getElementById('wheel');
+  const ctx = canvas.getContext('2d');
+
+  const numbers = [
+    0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36,
+    11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9,
+    22, 18, 29, 7, 28, 12, 35, 3, 26
+  ];
+
+  const colors = {
+    0: '#008000', // zielony
+    32: '#ff0000', 15: '#000000', 19: '#ff0000', 4: '#000000', 21: '#ff0000', 2: '#000000',
+    25: '#ff0000', 17: '#000000', 34: '#ff0000', 6: '#000000', 27: '#ff0000', 13: '#000000',
+    36: '#ff0000', 11: '#000000', 30: '#ff0000', 8: '#000000', 23: '#ff0000', 10: '#000000',
+    5: '#ff0000', 24: '#000000', 16: '#ff0000', 33: '#000000', 1: '#ff0000', 20: '#000000',
+    14: '#ff0000', 31: '#000000', 9: '#ff0000', 22: '#000000', 18: '#ff0000', 29: '#000000',
+    7: '#ff0000', 28: '#000000', 12: '#ff0000', 35: '#000000', 3: '#ff0000', 26: '#000000'
+  };
+  
+  canvas.width = 270;
+  canvas.height = 270;
+  
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const radius = 135;
+  const segmentCount = numbers.length;
+  const segmentAngle = 2 * Math.PI / segmentCount;
+
+  let currentAngle = 0;
+
+  function drawWheel() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for(let i = 0; i < segmentCount; i++) {
+      const startAngle = currentAngle + i * segmentAngle;
+      const endAngle = startAngle + segmentAngle;
+
+      // Rysowanie segmentu
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+      ctx.closePath();
+
+      ctx.fillStyle = colors[numbers[i]];
+      ctx.fill();
+
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Rysowanie liczby
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(startAngle + segmentAngle / 2 - 0.044);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 16px Courier';
+      ctx.fillText(numbers[i], radius - 10, 10);
+      ctx.restore();
+    }
+	// Rysowanie środkowego, obracającego się elementu
+ctx.save();
+ctx.translate(centerX, centerY);
+
+ctx.beginPath();
+ctx.arc(0, 0, 40, 0, 2 * Math.PI);
+ctx.fillStyle = '#222'; // kolor wypełnienia
+ctx.shadowColor = 'black';
+ctx.shadowBlur = 15;
+ctx.fill();
+ctx.strokeStyle = 'gold'; // kolor obwódki
+ctx.shadowColor = 'rgba(0, 0, 0, 1)';
+ctx.shadowBlur = 10;
+ctx.stroke();
+
+// Rysowanie złotego krzyżyka w środku, obracającego się z kołem
+ctx.save();
+ctx.rotate(currentAngle); // obracaj razem z kołem
+ctx.strokeStyle = 'gold';
+ctx.lineWidth = 6;
+ctx.lineCap = "round";
+ctx.shadowColor = 'gold';
+ctx.shadowBlur = 10;
+
+// Pozioma linia
+ctx.beginPath();
+ctx.moveTo(-25, 0);
+ctx.lineTo(25, 0);
+ctx.stroke();
+
+// Pionowa linia
+ctx.beginPath();
+ctx.moveTo(0, -25);
+ctx.lineTo(0, 25);
+ctx.stroke();
+
+ctx.restore();
+
+ctx.beginPath();
+ctx.arc(0, 0, 8, 0, 2 * Math.PI);
+ctx.fillStyle = 'gold'; // kolor wypełnienia
+ctx.shadowColor = 'gold';
+ctx.shadowBlur = 10;
+ctx.fill();
+ctx.restore();
+}
+
+  drawWheel();
+
+  const spinBtn = document.getElementById('spinBtn');
+  const resultDiv = document.getElementById('result');
+
+  let spinning = false;
+  let spinVelocity = 0;
+  let spinDeceleration = 0.97;
+
+  function getColorName(number) {
+    if (number === 0) return 'GREEN';
+    const redNumbers = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
+    if (redNumbers.includes(number)) return 'RED';
+    return 'BLACK';
+  }
+
+  function showResult() {
+    // Przeliczanie kąta wskaźnika na indeks segmentu
+const angleOffset = 0.0873; // 5 stopni w radianach
+const pointerAngle = (2 * Math.PI - currentAngle - Math.PI / 2 - segmentAngle / 2 + angleOffset) % (2 * Math.PI);
+
+    let index = Math.floor(pointerAngle / segmentAngle);
+    if (index < 0) index += segmentCount;
+
+    const number = numbers[index];
+    const color = colors[number];
+    const colorName = getColorName(number);
+
+    resultDiv.innerHTML = `<div style="font-size: 20px;">RESULT:</div><div  style="text-shadow: white 0 2px 5px; color: white;font-size: 30px; margin-top: 8px; box-shadow: 0px 5px 10px 3px black, 0 0 10px 3px gold; margin-left: 10px; margin-right: 10px; text-align: center; background-color:${color}; border-radius: 10px; border: 2px solid gold; font-weight:bold;">${number}</div>`;
+  }
+
+  function animate() {
+    if (!spinning) return;
+
+    spinVelocity *= spinDeceleration;
+	spinDeceleration = 0.997
+    if (spinVelocity < 0.002) {
+      spinning = false;
+      spinVelocity = 0;
+      showResult();
+      spinBtn.disabled = false;
+      return;
+    }
+
+    currentAngle += spinVelocity;
+    currentAngle %= 2 * Math.PI;
+
+    drawWheel();
+    requestAnimationFrame(animate);
+  }
+
+  spinBtn.addEventListener('click', () => {
+    if (spinning) return;
+    spinBtn.disabled = true;
+    resultDiv.textContent = 'SPINNING...';
+
+    spinVelocity = 0.3 + Math.random() * 0.3;
+    spinning = true;
+    animate();
+  });
+</script>
+
+</body>
+</html>
